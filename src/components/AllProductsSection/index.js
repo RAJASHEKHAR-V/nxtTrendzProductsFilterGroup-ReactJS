@@ -110,9 +110,10 @@ class AllProductsSection extends Component {
       this.setState({
         productsList: updatedData,
         isLoading: false,
+        isRequestFailed: false,
       })
     } else {
-      this.setState({isRequestFailed: true})
+      this.setState({isRequestFailed: true, productsList: []})
     }
   }
 
@@ -129,14 +130,18 @@ class AllProductsSection extends Component {
   }
 
   onKeydownInput = event => {
-    const isEntered = event.key
-    if (isEntered === 'Enter') {
-      this.setState({titleSearch: event.target.value}, this.getProducts)
+    if (event.key === 'Enter') {
+      this.setState(this.getProducts)
     }
   }
 
+  onChangeOfInput = event => {
+    this.setState({titleSearch: event.target.value})
+  }
+
+  // eslint-disable-next-line consistent-return
   renderProductsList = () => {
-    const {productsList, activeOptionId} = this.state
+    const {productsList, activeOptionId, isRequestFailed} = this.state
 
     // TODO: Add No Products View
     if (productsList.length > 0) {
@@ -155,19 +160,21 @@ class AllProductsSection extends Component {
         </div>
       )
     }
-    return (
-      <div className="all-products-container">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png"
-          className="no-product-image"
-          alt="no products"
-        />
-        <h1 className="no-product-heading">No Products Found</h1>
-        <p className="no-product-para">
-          We could not find any products. Try other filters.
-        </p>
-      </div>
-    )
+    if (productsList.length === 0 && isRequestFailed === false) {
+      return (
+        <div className="no-product-container">
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png"
+            className="no-product-image"
+            alt="no products"
+          />
+          <h1 className="no-product-heading">No Products Found</h1>
+          <p className="no-product-para">
+            We could not find any products. Try other filters.
+          </p>
+        </div>
+      )
+    }
   }
 
   renderLoader = () => (
@@ -178,14 +185,22 @@ class AllProductsSection extends Component {
 
   // TODO: Add failure view
   onFailureRequest = () => (
-    <div className="all-products-container">
+    <div className="failure-view-container">
       <img
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
         className="failure-image"
         alt="products failure"
       />
+      <h1 className="failure-view-heading">Oops! Something Went Wrong </h1>
+      <p className="failure-view-product-para">
+        We are having some trouble processing your request.Please try again.
+      </p>
     </div>
   )
+
+  onClearButton = () => {
+    this.setState({titleSearch: '', category: '', rating: ''}, this.getProducts)
+  }
 
   render() {
     const {isLoading, isRequestFailed, titleSearch, category} = this.state
@@ -201,6 +216,8 @@ class AllProductsSection extends Component {
           onRatingButton={this.onRatingButton}
           onKeydownInput={this.onKeydownInput}
           category={category}
+          onChangeOfInput={this.onChangeOfInput}
+          onClearButton={this.onClearButton}
         />
 
         {isLoading ? this.renderLoader() : this.renderProductsList()}

@@ -12,3 +12,133 @@
 }
 
 /* Write your CSS here */
+.input-el {
+  width: 95%;
+  height: 30px;
+  font-family: 'Roboto';
+  color: #0f172a;
+  outline: none;
+  font-size: 14px;
+  border: none;
+  background-color: #f1f5f9;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.category-heading {
+  font-family: 'Roboto';
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.category-card {
+  width: 90%;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rating-heading {
+  font-family: 'Roboto';
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 18px;
+}
+.rating-card {
+  width: 90%;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.clear-button {
+  height: 25px;
+  font-family: 'Roboto';
+  color: #0967d2;
+  font-weight: 700;
+  background-color: transparent;
+  border: 1px solid #0967d2;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.category-item {
+  width: 80%;
+}
+
+.category-button {
+  height: 25px;
+  font-family: 'Roboto';
+  color: #64748b;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.active {
+  color: #0967d2;
+}
+
+.rating-item {
+  width: 95%;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.rating-button {
+  width: 50%;
+  height: 25px;
+  font-family: 'Roboto';
+  color: #64748b;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.rating-image {
+  width: 70%;
+  height: 90%;
+}
+
+@media (min-width: 768px) {
+  .input-el {
+    width: 80%;
+    font-size: 15px;
+  }
+
+  .category-heading {
+    font-size: 20px;
+  }
+
+  .rating-heading {
+    font-size: 20px;
+  }
+
+  .clear-button {
+    font-size: 15px;
+  }
+  .category-button {
+    font-size: 15px;
+  }
+
+  .rating-button {
+    font-size: 15px;
+  }
+}

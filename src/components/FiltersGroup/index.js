@@ -9,7 +9,13 @@ const FiltersGroup = props => {
     onCategoryButton,
     onRatingButton,
     onKeydownInput,
+    onChangeOfInput,
+    onClearButton,
   } = props
+
+  const onClear = () => {
+    onClearButton()
+  }
 
   const callCategoryItem = eachCategory => {
     const {categoryId, name} = eachCategory
@@ -19,14 +25,10 @@ const FiltersGroup = props => {
     }
 
     return (
-      <li className="category-item">
-        <button
-          className={`category-button ${addActiveClass}`}
-          type="submit"
-          onClick={onCategory}
-        >
+      <li className="category-item" key={categoryId}>
+        <p className={`category-button ${addActiveClass}`} onClick={onCategory}>
           {name}
-        </button>
+        </p>
       </li>
     )
   }
@@ -38,7 +40,7 @@ const FiltersGroup = props => {
     }
 
     return (
-      <li className="rating-item">
+      <li className="rating-item" key={ratingId}>
         <button className="rating-button" type="submit" onClick={onRating}>
           <img
             src={imageUrl}
@@ -54,19 +56,26 @@ const FiltersGroup = props => {
   return (
     <div className="filters-group-container">
       <input
-        type="text"
+        placeholder="Search"
+        type="search"
         className="input-el"
         value={titleSearch}
         onKeyDown={onKeydownInput}
+        onChange={onChangeOfInput}
       />
-      <h1>Category</h1>
+      <h1 className="category-heading">Category</h1>
       <ul className="category-card">
         {categoryOptions.map(eachCategory => callCategoryItem(eachCategory))}
       </ul>
-      <h1>Rating</h1>
+      <h1 className="rating-heading">Rating</h1>
       <ul className="rating-card">
         {ratingsList.map(eachRating => callRating(eachRating))}
       </ul>
+      <div>
+        <button className="clear-button" type="submit" onClick={onClear}>
+          Clear Filters
+        </button>
+      </div>
     </div>
   )
 }
